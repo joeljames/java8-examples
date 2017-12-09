@@ -1,10 +1,11 @@
 java8-examples
 ==============
 
-Introduction to java8 features. This modules provides short and simple examples of lambda expressions, method references
+Introduction to java8 features. This module provides short and simple examples of lambda expressions, method references,
 functional interface, and streams API.
 
 Table of Contents
 -----------------
 
-  * [Lambda expressions](src/examples/SimpleLambda.java)
+  * [Lambda Expressions](src/examples/SimpleLambda.java)
+  * [Method References](src/examples/MethodReferencesLambda.java)
