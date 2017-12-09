@@ -7,4 +7,4 @@ functional interface, and streams API.
 Table of Contents
 -----------------
 
-
+  * [Lambda expressions](src/SimpleLambda.java)
