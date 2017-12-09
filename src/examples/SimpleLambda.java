@@ -24,6 +24,7 @@ public class SimpleLambda {
       
         // ----------------Collections sorting example--------------  
         List<String> names = Arrays.asList("John", "Smith", "Paul");
+        // Traditional way
         Collections.sort(names, new Comparator<String>() {
 
             @Override
