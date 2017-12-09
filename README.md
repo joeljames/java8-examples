@@ -9,3 +9,4 @@ Table of Contents
 
   * [Lambda Expressions](src/examples/SimpleLambda.java)
   * [Method References](src/examples/MethodReferencesLambda.java)
+  * [New Collections API](src/examples/NewAPICollections.java)
