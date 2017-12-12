@@ -11,3 +11,4 @@ Table of Contents
   * [Method References](src/examples/MethodReferencesLambda.java)
   * [New Collections API](src/examples/NewAPICollections.java)
   * [New Maps API](src/examples/NewAPIMap.java)
+  * [Stream Building API](src/examples/MainStreamBuilding.java)

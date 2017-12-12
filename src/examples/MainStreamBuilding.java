@@ -325,7 +325,5 @@ public class MainStreamBuilding {
                           return sum1 + sum2;
                       });
           System.out.println(r1);
-
-
     }
 }
