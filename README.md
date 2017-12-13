@@ -53,3 +53,6 @@ Table of Contents
         * excepts identity and BinaryOperator(accumulator)
         * excepts identity, BiFunction and accumulator
     * parallelStream
+  * [Functional Interface](src/examples/MainPredicate.java)
+    * Predicate Example
+
