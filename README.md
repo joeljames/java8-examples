@@ -53,6 +53,8 @@ Table of Contents
         * excepts identity and BinaryOperator(accumulator)
         * excepts identity, BiFunction and accumulator
     * parallelStream
-  * [Functional Interface](src/examples/MainPredicate.java)
-    * Predicate Example
+  * [Avoiding Null check](src/examples/MainNullCheck.java)
+  * [Functional Interface Predicate Example](src/examples/MainPredicate.java)
+  * [Functional Interface Comparator Example](src/examples/MainComparator.java)
 
+Thanks for reading!

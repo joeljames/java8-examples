@@ -26,7 +26,7 @@ public interface Predicate<T> {
 //    public static Predicate<String> isEqualsTo(String string) {
 //        return s -> s.equals(string);
 //    }
-//    
+  
     //parameterize the above static method 
     public static <U> Predicate<U> isEqualsTo(U u) {
         return s -> s.equals(u);
