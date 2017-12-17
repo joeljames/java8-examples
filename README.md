@@ -54,6 +54,18 @@ Table of Contents
         * excepts identity, BiFunction and accumulator
     * parallelStream
   * [Avoiding Null check](src/examples/MainNullCheck.java)
+  * [String](src/examples/MainStrings.java)
+    * join
+    * chars
+    * regex
+    * regex as predicate
+  * [File IO](src/examples/MainFileIO.java)
+      * listing files in a directory
+      * listing files of directory and sub directory
+      * Files.readAllLines to read files
+      * Files.lines to read files as stream
+      * Files.newBufferedReader for buffered reading
+      * Files.newBufferedWriter for buffered writing
   * [Functional Interface Predicate Example](src/examples/MainPredicate.java)
   * [Functional Interface Comparator Example](src/examples/MainComparator.java)
 

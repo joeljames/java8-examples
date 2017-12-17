@@ -23,7 +23,6 @@ public class MainNullCheck {
         nested.setInner(inner);
         outer.setNested(nested);
         
-        
         //traditional way
         System.out.println("In the traditional check");
         if (outer != null && outer.getNested() != null && outer.getNested().getInner() != null) {
