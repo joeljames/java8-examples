@@ -66,6 +66,18 @@ Table of Contents
       * Files.lines to read files as stream
       * Files.newBufferedReader for buffered reading
       * Files.newBufferedWriter for buffered writing
+  * [Concurrency and Executors](src/examples/MainConcurrencyThreadsAndExecutors.java)
+      * creating runnable tasks
+      * using executors
+      * safe stopping of an executor
+      * using callables
+      * executors InvokeAll
+      * executors InvokeAny
+      * ScheduleExecutors for running tasks periodically
+      * scheduleAtFixedRate
+      * scheduleWithFixedDelay
+
+
   * [Functional Interface Predicate Example](src/examples/MainPredicate.java)
   * [Functional Interface Comparator Example](src/examples/MainComparator.java)
 
