@@ -177,7 +177,6 @@ public class MainConcurrencyThreadsAndExecutors {
         
         Runnable task5 = () -> System.out.println("Scheduling: " + System.nanoTime());
         ScheduledFuture<?> future5 = executor5.schedule(task5, 3, TimeUnit.SECONDS);
-        
         try {
             TimeUnit.MICROSECONDS.sleep(1337);
         } catch (InterruptedException e) {
