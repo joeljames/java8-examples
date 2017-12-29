@@ -12,6 +12,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import utils.ConcurrentUtils;
+
 public class MainConcurrencyThreadsAndExecutors {
 
     static Callable<String> callable(String result, long sleepSconds) {
@@ -30,25 +32,24 @@ public class MainConcurrencyThreadsAndExecutors {
         //run the task in the main thread
         task.run();
         
-        // run the task by spanning up a new thread 
+        //run the task by spanning up a new thread 
         Thread thread = new Thread(task);
         thread.start();
         System.out.println("Done!");
 
         System.out.println("Threads can be put to sleep: ");
-        // Simulate long running tasks
+        //Simulate long running tasks
         
         Runnable task2 = () -> {
             String threadName = Thread.currentThread().getName();
             System.out.println("Foo " + threadName);
             try {
+                // Alternatively you can achieve the same by calling Thread.sleep(1000)
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            // Alternatively you can achieve the same by calling Thread.sleep(1000)
             System.out.println("Bar " + threadName);
-
         };
         Thread thread2 = new Thread(task2);
         thread2.start();
@@ -56,44 +57,21 @@ public class MainConcurrencyThreadsAndExecutors {
         System.out.println("Threads example using executor: ");
         //ExecutorService is a higher level replacement for working with threads directly
         //Executors are capable of running asynchronous tasks and typically manage a pool of threads.
-        //so we don't have to create new threads manually
-        //Let create a executor with a thread pool of size one
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
-            String threadName = Thread.currentThread().getName();
-            System.out.println("Hello " + threadName);            
+            System.out.println("Hello " + Thread.currentThread().getName());            
         });
-
+        
         System.out.println("Example on how to stop an executor: ");
-        //An ExecutorService provides two methods to stop: 
-        //1)shutdown() waits for currently running tasks to finish 
-        //2)shutdownNow() interrupts all running tasks and shut the executor down immediately
-
-        //shot down softly by waiting a certain amount of time
-        //after 5 seconds fore shut down all the treads
-        try {
-            System.out.println("attempt to shutdown executor");
-            executor.shutdown();
-            executor.awaitTermination(5, TimeUnit.SECONDS);
-        } 
-        catch (InterruptedException e) {
-            System.out.println("task interrupted");
-            
-        }
-        finally {
-            if (!executor.isTerminated()) {
-                System.out.println("force terminnating non finished tasks.");
-            }
-            executor.shutdownNow();
-            System.out.println("shutdown finished");
-        }
+        //The stop method is defined in ConcurrentUtils.stop module
+        ConcurrentUtils.stop(executor);
         
         System.out.println("Example callables: ");
         //Similar to Runnable's but instead of being void they return a value
         //Callables can be submitted to executor services just like runnables
-        // submit() doesn't wait until the task completes, 
-        // the executor service cannot return the result of the callable directly
-        // executor returns a special result of type Future which can be used to retrieve the actual result 
+        //submit() doesn't wait until the task completes, 
+        //the executor service cannot return the result of the callable directly
+        //executor returns a special result of type Future which can be used to retrieve the actual result 
         // at a later point in time
         Callable<Integer> task3 = () -> {
             try {
@@ -115,7 +93,6 @@ public class MainConcurrencyThreadsAndExecutors {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        
         System.out.println("future done? " + future.isDone());
         try {
             result = future.get();
@@ -123,6 +100,7 @@ public class MainConcurrencyThreadsAndExecutors {
             e.printStackTrace();
         }
         System.out.print("result: " + result);
+        ConcurrentUtils.stop(executor1);
         
         System.out.println("Example timeouts: ");
         ExecutorService executor2 = Executors.newFixedThreadPool(1);
@@ -133,6 +111,7 @@ public class MainConcurrencyThreadsAndExecutors {
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             e.printStackTrace();
         }
+        ConcurrentUtils.stop(executor2);
 
         System.out.println("Example InvokeAll: ");
         //Batch submitting of multiple callables
@@ -156,6 +135,7 @@ public class MainConcurrencyThreadsAndExecutors {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        ConcurrentUtils.stop(executor3);
 
         System.out.println("Example InvokeAny: ");
         //returns the result of the fastest callable
@@ -171,6 +151,7 @@ public class MainConcurrencyThreadsAndExecutors {
             e.printStackTrace();
         }
         System.out.println(result1);
+        ConcurrentUtils.stop(executor4);
         
         System.out.println("Scheduled Executors for running tasks periodically: ");
         ScheduledExecutorService executor5 = Executors.newScheduledThreadPool(1);
@@ -188,14 +169,15 @@ public class MainConcurrencyThreadsAndExecutors {
         System.out.println("Execute task periodically (scheduleAtFixedRate): ");
         //capable of executing tasks with a fixed time rate
         int initialDelay = 0; //wait before the task will be executed
-        int period = 1; 
-        //triggers this task every sec
+        int period = 1; //triggers this task every sec
         //the drawback of this method is that it doesn't take into account the actual duration of the task
         //So if you specify a period of one second but the task needs 2 seconds to be executed 
         //then the thread pool will working to capacity very soon
         executor5.scheduleAtFixedRate(task5, initialDelay, period, TimeUnit.SECONDS);
+        ConcurrentUtils.stop(executor5);
 
         System.out.println("Execute task periodically (scheduleWithFixedDelay): ");
+        ScheduledExecutorService executor6 = Executors.newScheduledThreadPool(1);
         Runnable task6 = () -> {
             try {
                 TimeUnit.SECONDS.sleep(2);
@@ -208,7 +190,7 @@ public class MainConcurrencyThreadsAndExecutors {
         //This method works just like the counterpart described above. 
         //The difference is that the wait time period applies between the end of a task 
         //and the start of the next task
-        executor5.scheduleWithFixedDelay(task6, 1, 1, TimeUnit.SECONDS);
-
+        executor6.scheduleWithFixedDelay(task6, 1, 1, TimeUnit.SECONDS);
+        ConcurrentUtils.stop(executor6);
     }
 }

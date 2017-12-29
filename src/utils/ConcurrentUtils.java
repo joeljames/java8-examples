@@ -6,6 +6,12 @@ import java.util.concurrent.TimeUnit;
 public class ConcurrentUtils {
     
     public static void stop(ExecutorService executor) {
+        //An ExecutorService provides two methods to stop: 
+        //1)shutdown() waits for currently running tasks to finish 
+        //2)shutdownNow() interrupts all running tasks and shut the executor down immediately
+
+        //shutdown softly by waiting a certain amount of time
+        //after 5 seconds fore shut down all the treads
         try {
             executor.shutdown();
             executor.awaitTermination(60, TimeUnit.SECONDS);

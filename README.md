@@ -78,7 +78,7 @@ Table of Contents
       * scheduleAtFixedRate
       * scheduleWithFixedDelay
   * [Synchronization](src/examples/MainSynchronization.java)
-      * Problems accessing shared resources with multiple threads simultaniously
+      * Problems accessing shared resources with multiple threads simultaneously
       * ReentrantLock
       * Different methods which ReentrantLock locks support
       * ReentrantReadWriteLock
