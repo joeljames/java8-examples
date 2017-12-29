@@ -15,6 +15,7 @@ Table of Contents
     * BinaryOperator
     * Consumer
     * Supplier
+    * Optional
   * [New Collections API](src/examples/NewAPICollections.java)
     * forEach
     * removeIf

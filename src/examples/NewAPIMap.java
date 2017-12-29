@@ -15,7 +15,6 @@ public class NewAPIMap {
         Person p3 = new Person("Chelsea", 46);
         Person p4 = new Person("David", 28);
         Person p5 = new Person("Erica", 37);
-        Person p6 = new Person("Francisco", 18);
 
         City newYork = new City("New York");
         City shanghai = new City("Shanghai");
@@ -24,23 +23,23 @@ public class NewAPIMap {
         Map<City, List<Person>> map = new HashMap<>();
 
         // -----------Example getOrDefault------------
-        System.out.println("Example getOrDefault");
-        System.out.println("People from Paris: " + map.getOrDefault(paris, Collections.EMPTY_LIST));
+        System.out.println("Example getOrDefault: ");
+        System.out.println("People from Paris: " + map.getOrDefault(paris, Collections.emptyList()));
     
         // -----------Example putIfAbsent------------
-        System.out.println("Example putIfAbsent");
+        System.out.println("Example putIfAbsent: ");
         map.putIfAbsent(paris, new ArrayList<>());
         map.get(paris).add(p1);
         
         // -----------Example computeIfAbsent------------
-        System.out.println("Example computeIfAbsent");
+        System.out.println("Example computeIfAbsent: ");
         map.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p2);
         //Since the key is already added in the above line the below lambda expression won't be executed
         map.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p3);
         System.out.println("People from newYork: " + map.get(newYork));
 
         // -----------Example merge------------
-        System.out.println("Example merge");
+        System.out.println("Example merge: ");
         
         Map<City, List<Person>> map1 = new HashMap<>();
         map1.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p1);

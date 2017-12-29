@@ -21,6 +21,7 @@ public class SimpleLambda {
         
         // Lambda way
         Comparator<String> c2 = (String s1, String s2) -> Integer.compare(s1.length(), s2.length());
+        //call the comparator by c2.compare("strign1", "string2");
       
         // ----------------Collections sorting example--------------  
         List<String> names = Arrays.asList("John", "Smith", "Paul");
@@ -64,5 +65,6 @@ public class SimpleLambda {
                 System.out.println("It works");
             }
         };
+        //call the runnable by calling r2.run();
     }
 }
