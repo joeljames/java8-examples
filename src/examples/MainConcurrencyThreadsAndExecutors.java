@@ -169,7 +169,7 @@ public class MainConcurrencyThreadsAndExecutors {
         System.out.println("Execute task periodically (scheduleAtFixedRate): ");
         //capable of executing tasks with a fixed time rate
         int initialDelay = 0; //wait before the task will be executed
-        int period = 1; //triggers this task every sec
+        int period = 1; //triggers this task every second
         //the drawback of this method is that it doesn't take into account the actual duration of the task
         //So if you specify a period of one second but the task needs 2 seconds to be executed 
         //then the thread pool will working to capacity very soon

@@ -18,7 +18,7 @@ public class MainSynchronization {
 
     static int count = 0;
     
-    static void incerement() {
+    static void increment() {
         count = count + 1;
     }
     
@@ -42,7 +42,7 @@ public class MainSynchronization {
         //if step1 is performed in parallel(2 threads  reading the same value) 
         //then its possible that the result is lost in writes, so the actual result is lower  
         //Use the synchronized key word to fix the above issue 
-        //synchronized void incerement() {
+        //synchronized void increment() {
         //    count = count + 1;
         //}
         //IntStream.range(0, 10000)
@@ -58,8 +58,6 @@ public class MainSynchronization {
         
         System.out.println("ReentrantLock (mutial exclusion lock)");
         ReentrantLock lock = new ReentrantLock();
-        
-        int count1 = 0;
         lock.lock();
         //It is important to wrap your code in try/finally to ensure unlocking in case of exception
         //if other thread has already acquired the lock 
@@ -73,8 +71,6 @@ public class MainSynchronization {
 
         System.out.println("Different methods which ReentrantLock locks support: ");
         ExecutorService executor3 = Executors.newFixedThreadPool(2);
-        ReentrantLock lock3 = new ReentrantLock();
-        
         executor3.submit(() -> {
             lock.lock();
             try {
@@ -96,10 +92,9 @@ public class MainSynchronization {
 
         System.out.println("ReentrantReadWriteLock: ");
         //the idea behind read write locks are that its usually safe to read 
-        // the variable as long as no one is writing to it
+        //the variable as long as no one is writing to it.
         //so the read locks can be held by multiple threads as long as no one is writing to it
-        //This can improve the throughput in case reads are more frequent than writes
-        
+        //This improves the throughput in case reads are more frequent than writes.
         ExecutorService executer4 = Executors.newFixedThreadPool(2);
         Map<String, String> map = new HashMap<>();
         ReadWriteLock lock4 = new ReentrantReadWriteLock();
@@ -129,7 +124,6 @@ public class MainSynchronization {
         };
         //the read task has to wait for the write lock to be released
         //after the write lock has been released both the read tasks are executed in parallel
-        //read lock can safely be acquired concurrently as long as there is no write locks
         executer4.submit(readTask);
         executer4.submit(readTask);
         ConcurrentUtils.stop(executer4);
@@ -174,7 +168,7 @@ public class MainSynchronization {
         System.out.println("StampedLock with optimistic locking: ");
         //In contrast to normal read locks an optimistic read locks dosen't 
         //prevent other threads to obtain a write lock.
-        // After sending the first thread to sleep for one second the second thread 
+        //After sending the first thread to sleep for one second the second thread 
         //obtains a write lock without waiting for the optimistic read lock to be released. 
         //From this point the optimistic read lock is no longer valid. 
         //Even when the write lock is released the optimistic read locks stays invalid
