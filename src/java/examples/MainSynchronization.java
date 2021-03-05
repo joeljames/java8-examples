@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.StampedLock;
 import java.util.stream.IntStream;
 
-import utils.ConcurrentUtils;
+import examples.utils.ConcurrentUtils;
 
 public class MainSynchronization {
 

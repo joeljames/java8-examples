@@ -7,3 +7,17 @@ idea {
         languageLevel = '10'
     }
 }
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+dependencies {
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
+    testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+}
+
+sourceSets.main.java.srcDirs += ['src/java']

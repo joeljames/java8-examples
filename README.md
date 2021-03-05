@@ -7,26 +7,26 @@ functional interface, new collections API, new maps API, and streams API.
 Table of Contents
 -----------------
 
-  * [Lambda Expressions](src/examples/SimpleLambda.java)
+  * [Lambda Expressions](src/java/examples/SimpleLambda.java)
     * Creating a Comparator
     * Creating a Runnable
-  * [Method References](src/examples/MethodReferencesLambda.java)
+  * [Method References](src/java/examples/MethodReferencesLambda.java)
     * Function
     * BinaryOperator
     * Consumer
     * Supplier
     * Optional
-  * [New Collections API](src/examples/NewAPICollections.java)
+  * [New Collections API](src/java/examples/NewAPICollections.java)
     * forEach
     * removeIf
     * replaceAll
     * sort
-  * [New Maps API](src/examples/NewAPIMap.java)
+  * [New Maps API](src/java/examples/NewAPIMap.java)
     * getOrDefault
     * putIfAbsent
     * computeIfAbsent
     * merge
-  * [Stream Building API](src/examples/MainStreamBuilding.java)
+  * [Stream Building API](src/java/examples/MainStreamBuilding.java)
     * Collections to Stream
     * Stream.generate
     * Stream.iterate
@@ -54,20 +54,20 @@ Table of Contents
         * excepts identity and BinaryOperator(accumulator)
         * excepts identity, BiFunction and accumulator
     * parallelStream
-  * [Avoiding Null check](src/examples/MainNullCheck.java)
-  * [String](src/examples/MainStrings.java)
+  * [Avoiding Null check](src/java/examples/MainNullCheck.java)
+  * [String](src/java/examples/MainStrings.java)
     * join
     * chars
     * regex
     * regex as predicate
-  * [File IO](src/examples/MainFileIO.java)
+  * [File IO](src/java/examples/MainFileIO.java)
       * listing files in a directory
       * listing files of directory and sub directory
       * Files.readAllLines to read files
       * Files.lines to read files as stream
       * Files.newBufferedReader for buffered reading
       * Files.newBufferedWriter for buffered writing
-  * [Concurrency and Executors](src/examples/MainConcurrencyThreadsAndExecutors.java)
+  * [Concurrency and Executors](src/java/examples/MainConcurrencyThreadsAndExecutors.java)
       * creating runnable tasks
       * using executors
       * safe stopping of an executor
@@ -77,7 +77,7 @@ Table of Contents
       * ScheduleExecutors for running tasks periodically
       * scheduleAtFixedRate
       * scheduleWithFixedDelay
-  * [Synchronization](src/examples/MainSynchronization.java)
+  * [Synchronization](src/java/examples/MainSynchronization.java)
       * Problems accessing shared resources with multiple threads simultaneously
       * ReentrantLock
       * Different methods which ReentrantLock locks support
@@ -86,7 +86,7 @@ Table of Contents
       * StampedLock with optimistic locking
       * StampedLock convert read lock to write lock (tryConvertToWriteLock)
       * Semaphores
-  * [Functional Interface Predicate Example](src/examples/MainPredicate.java)
-  * [Functional Interface Comparator Example](src/examples/MainComparator.java)
+  * [Functional Interface Predicate Example](src/java/examples/MainPredicate.java)
+  * [Functional Interface Comparator Example](src/java/examples/MainComparator.java)
 
 Thanks for reading!
