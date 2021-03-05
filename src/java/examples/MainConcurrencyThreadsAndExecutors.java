@@ -1,26 +1,58 @@
 package examples;
 
+import examples.utils.ConcurrentUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
-
-import examples.utils.ConcurrentUtils;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MainConcurrencyThreadsAndExecutors {
 
     static Callable<String> callable(String result, long sleepSconds) {
         return () -> {
-          TimeUnit.SECONDS.sleep(sleepSconds);
-          return result;
+            TimeUnit.SECONDS.sleep(sleepSconds);
+            return result;
         };
     }
-    
+
+    static int square(int num) {
+        return num * num;
+    }
+
+    static String toString(int num) {
+        return String.valueOf(num);
+    }
+
     public static void main(String[] args) {
+        System.out.println("Example CompletableFuture: ");
+        //CompletableFuture is very similar to JS Promise async calls followed by `.then`
+        //Note: each num in the map will be executed in parallel (separate threads)
+        List<CompletableFuture<String>> results = Stream.of(1, 5, 20).map(num -> {
+                    //No need to manage thread pool eg: Executors.newFixedThreadPool(2). Internally it use a ForkJoin pool
+                    return CompletableFuture.supplyAsync(() -> square(num))
+                            .thenApply(squareNum -> toString(squareNum))
+                            .thenApply(stringNum -> String.format("Prefix %s", stringNum))
+                            //similar to a catch block in-case any failure in the above steps
+                            .exceptionally(e -> {
+                                e.printStackTrace();
+                                return "";
+                            })
+                            .thenApply(prefixedNum -> String.format("%s Suffix", prefixedNum));
+//                            .thenAccept(System.out::println);
+                }
+        ).collect(Collectors.toList());
+
+        List<String> joinedResults = results
+                .stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
+
+        System.out.println("CompletableFuture Result is: " + joinedResults);
+
+
         System.out.println("Creating runnable task: ");
-
-        // CompletableFuture
-//        CompletableFuture.supplyAsync();
-
         Runnable task = () -> {
             String threadName = Thread.currentThread().getName();
             System.out.println("Hello " + threadName);
@@ -73,8 +105,7 @@ public class MainConcurrencyThreadsAndExecutors {
             try {
                 TimeUnit.SECONDS.sleep(1);
                 return 123;
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 throw new IllegalStateException("task interrupted exception", e);
 
             }
@@ -118,16 +149,15 @@ public class MainConcurrencyThreadsAndExecutors {
         ExecutorService executor3 = Executors.newWorkStealingPool();
         try {
             executor3.invokeAll(callables)
-                .stream()
-                .map(f -> {
-                    try {
-                        return f.get();
-                    }
-                    catch (Exception e) {
-                        throw new IllegalStateException(e);
-                    }
-                })
-                .forEach(System.out::println);
+                    .stream()
+                    .map(f -> {
+                        try {
+                            return f.get();
+                        } catch (Exception e) {
+                            throw new IllegalStateException(e);
+                        }
+                    })
+                    .forEach(System.out::println);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -178,8 +208,7 @@ public class MainConcurrencyThreadsAndExecutors {
             try {
                 TimeUnit.SECONDS.sleep(2);
                 System.out.println("Scheduling: " + System.nanoTime());
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 System.out.println("Task interrupted");
             }
         };
