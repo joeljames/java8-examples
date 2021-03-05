@@ -68,6 +68,7 @@ Table of Contents
       * Files.newBufferedReader for buffered reading
       * Files.newBufferedWriter for buffered writing
   * [Concurrency and Executors](src/java/examples/MainConcurrencyThreadsAndExecutors.java)
+      * CompletableFuture example
       * creating runnable tasks
       * using executors
       * safe stopping of an executor

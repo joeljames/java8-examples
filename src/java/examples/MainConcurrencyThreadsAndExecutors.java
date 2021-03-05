@@ -17,7 +17,12 @@ public class MainConcurrencyThreadsAndExecutors {
         };
     }
 
-    static int square(int num) {
+    static int squareWithHeavyComputation(int num) {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return num * num;
     }
 
@@ -31,7 +36,7 @@ public class MainConcurrencyThreadsAndExecutors {
         //Note: each num in the map will be executed in parallel (separate threads)
         List<CompletableFuture<String>> results = Stream.of(1, 5, 20).map(num -> {
                     //No need to manage thread pool eg: Executors.newFixedThreadPool(2). Internally it use a ForkJoin pool
-                    return CompletableFuture.supplyAsync(() -> square(num))
+                    return CompletableFuture.supplyAsync(() -> squareWithHeavyComputation(num))
                             .thenApply(squareNum -> toString(squareNum))
                             .thenApply(stringNum -> String.format("Prefix %s", stringNum))
                             //similar to a catch block in-case any failure in the above steps
