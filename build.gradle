@@ -1,0 +1,9 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+
+idea {
+    project {
+        jdkName = '11'
+        languageLevel = '10'
+    }
+}

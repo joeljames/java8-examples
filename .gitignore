@@ -25,3 +25,9 @@ hs_err_pid*
 
 # Project
 res/example-out.js
+
+
+##########################
+## Gradle
+##########################
+.gradle
