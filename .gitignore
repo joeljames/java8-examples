@@ -30,4 +30,10 @@ res/example-out.js
 ##########################
 ## Gradle
 ##########################
+*/out/
+*/build
+build
+**/log
 .gradle
+.idea
+.java-version
