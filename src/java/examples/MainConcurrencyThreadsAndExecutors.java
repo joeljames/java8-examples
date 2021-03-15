@@ -37,7 +37,7 @@ public class MainConcurrencyThreadsAndExecutors {
         List<CompletableFuture<String>> results = Stream.of(1, 5, 20).map(num -> {
                     //No need to manage thread pool eg: Executors.newFixedThreadPool(2). Internally it use a ForkJoin pool
                     return CompletableFuture.supplyAsync(() -> squareWithHeavyComputation(num))
-                            .thenApply(squareNum -> toString(squareNum))
+                            .thenApply(squareNum -> toString(squareNum)) // thenApply is similar to .map in stream. Performs transformation
                             .thenApply(stringNum -> String.format("Prefix %s", stringNum))
                             //similar to a catch block in-case any failure in the above steps
                             .exceptionally(e -> {
@@ -45,10 +45,13 @@ public class MainConcurrencyThreadsAndExecutors {
                                 return "";
                             })
                             .thenApply(prefixedNum -> String.format("%s Suffix", prefixedNum));
-//                            .thenAccept(System.out::println);
+//                            .thenAccept(data -> commitToDb(data)) // thenAccept is similar to .forEach in stream
+//                            .thenRun(() -> System.out.println("Go grab a drink, everything worked"));
+
                 }
         ).collect(Collectors.toList());
 
+        // Get data from the future collection above.
         List<String> joinedResults = results
                 .stream()
                 .map(CompletableFuture::join)
