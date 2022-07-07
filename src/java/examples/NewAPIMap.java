@@ -1,10 +1,7 @@
 package examples;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Comparator;
+import java.util.*;
 
 public class NewAPIMap {
 
@@ -19,18 +16,18 @@ public class NewAPIMap {
         City newYork = new City("New York");
         City shanghai = new City("Shanghai");
         City paris = new City("Paris");
-        
+
         Map<City, List<Person>> map = new HashMap<>();
 
         // -----------Example getOrDefault------------
         System.out.println("Example getOrDefault: ");
         System.out.println("People from Paris: " + map.getOrDefault(paris, Collections.emptyList()));
-    
+
         // -----------Example putIfAbsent------------
         System.out.println("Example putIfAbsent: ");
         map.putIfAbsent(paris, new ArrayList<>());
         map.get(paris).add(p1);
-        
+
         // -----------Example computeIfAbsent------------
         System.out.println("Example computeIfAbsent: ");
         map.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p2);
@@ -38,14 +35,25 @@ public class NewAPIMap {
         map.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p3);
         System.out.println("People from newYork: " + map.get(newYork));
 
+        // -----------Sort Map------------
+        System.out.println("Sort Map: ");
+        Map<String, Integer> sortedMap = new LinkedHashMap<>();
+        Map.of("A", 10, "B", 3, "C", 1).entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+//                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())) //Descending order
+//                .sorted(Comparator.comparing(Map.Entry::getValue)) //Same as above
+                .forEachOrdered(k -> sortedMap.put(k.getKey(), k.getValue()));
+        System.out.println("The sorted map is: " + sortedMap);
+
+
         // -----------Example merge------------
         System.out.println("Example merge: ");
-        
+
         Map<City, List<Person>> map1 = new HashMap<>();
         map1.computeIfAbsent(newYork, city -> new ArrayList<>()).add(p1);
         map1.computeIfAbsent(shanghai, city -> new ArrayList<>()).add(p2);
         map1.computeIfAbsent(shanghai, city -> new ArrayList<>()).add(p3);
-        
+
         System.out.println("Map 1");
         map1.forEach((key, value) -> System.out.println(key + ": " + value));
 
@@ -53,10 +61,10 @@ public class NewAPIMap {
         map2.computeIfAbsent(shanghai, city -> new ArrayList<>()).add(p4);
         map2.computeIfAbsent(paris, city -> new ArrayList<>()).add(p4);
         map2.computeIfAbsent(paris, city -> new ArrayList<>()).add(p5);
-        
+
         System.out.println("Map 2");
         map1.forEach((key, value) -> System.out.println(key + ": " + value));
-        
+
         map2.forEach((city, people) -> {
             map1.merge(city, people, (peopleFromMap1, peopleFromMap2) -> {
                 peopleFromMap1.addAll(peopleFromMap2);
@@ -64,7 +72,7 @@ public class NewAPIMap {
             });
         });
         System.out.println("Merged result");
-        map1.forEach((key, value) -> System.out.println(key + ": " + value));   
+        map1.forEach((key, value) -> System.out.println(key + ": " + value));
     }
 
 }

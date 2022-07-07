@@ -25,6 +25,7 @@ Table of Contents
     * getOrDefault
     * putIfAbsent
     * computeIfAbsent
+    * sortMap
     * merge
   * [Stream Building API](src/java/examples/MainStreamBuilding.java)
     * Collections to Stream
