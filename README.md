@@ -4,6 +4,17 @@ java8-examples
 Introduction to java8 features. This module provides short and simple examples of lambda expressions, method references,
 functional interface, new collections API, new maps API, and streams API.
 
+Developer Setup
+-----------------
+
+We use sdkman to manage java versions. Install sdkman by following the instructions [here](https://sdkman.io/install).
+You could also enable automatically switching to the correct version of java when you cd into this directory.
+This can be configured by updating the config in `~/.sdkman/etc/config` to `sdkman_auto_env=true`
+Run the command below to install the configured version of java:
+
+    sdk env install
+
+
 Table of Contents
 -----------------
 
@@ -90,5 +101,7 @@ Table of Contents
       * Semaphores
   * [Functional Interface Predicate Example](src/java/examples/MainPredicate.java)
   * [Functional Interface Comparator Example](src/java/examples/MainComparator.java)
+  * [Bytes to String](src/java/examples/BytesToString.java)
+  * [By Reference](src/java/examples/ByReference.java)
 
 Thanks for reading!
