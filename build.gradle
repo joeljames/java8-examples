@@ -16,6 +16,9 @@ sourceCompatibility = 17
 targetCompatibility = 17
 
 dependencies {
+    implementation('com.google.guava:guava:31.1-jre')
+
+
     testImplementation('org.junit.jupiter:junit-jupiter-api:5.5.2')
     testImplementation('org.junit.jupiter:junit-jupiter-engine:5.5.2')
 }

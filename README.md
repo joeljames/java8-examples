@@ -103,5 +103,6 @@ Table of Contents
   * [Functional Interface Comparator Example](src/java/examples/MainComparator.java)
   * [Bytes to String](src/java/examples/BytesToString.java)
   * [By Reference](src/java/examples/ByReference.java)
+  * [Graph](src/java/examples/Graph.java)
 
 Thanks for reading!
