@@ -31,7 +31,9 @@ public class MainConcurrencyThreadsAndExecutors {
     }
 
     public static void main(String[] args) {
+        //================================================================
         System.out.println("Example CompletableFuture: ");
+        //================================================================
         //CompletableFuture is very similar to JS Promise async calls followed by `.then`
         //Note: each num in the map will be executed in parallel (separate threads)
         List<CompletableFuture<String>> results = Stream.of(1, 5, 20).map(num -> {
@@ -73,9 +75,10 @@ public class MainConcurrencyThreadsAndExecutors {
         thread.start();
         System.out.println("Done!");
 
+        //================================================================
         System.out.println("Threads can be put to sleep: ");
+        //================================================================
         //Simulate long running tasks
-
         Runnable task2 = () -> {
             String threadName = Thread.currentThread().getName();
             System.out.println("Foo " + threadName);
@@ -90,7 +93,9 @@ public class MainConcurrencyThreadsAndExecutors {
         Thread thread2 = new Thread(task2);
         thread2.start();
 
+        //================================================================
         System.out.println("Threads example using executor: ");
+        //================================================================
         //ExecutorService is a higher level replacement for working with threads directly
         //Executors are capable of running asynchronous tasks and typically manage a pool of threads.
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -102,7 +107,9 @@ public class MainConcurrencyThreadsAndExecutors {
         //The stop method is defined in ConcurrentUtils.stop module
         ConcurrentUtils.stop(executor);
 
+        //================================================================
         System.out.println("Example callables: ");
+        //================================================================
         //Similar to Runnable's but instead of being void they return a value
         //Callables can be submitted to executor services just like runnables
         //submit() doesn't wait until the task completes,
@@ -148,7 +155,9 @@ public class MainConcurrencyThreadsAndExecutors {
         }
         ConcurrentUtils.stop(executor2);
 
+        //================================================================
         System.out.println("Example InvokeAll: ");
+        //================================================================
         //Batch submitting of multiple callables
         List<Callable<String>> callables = Arrays.asList(
                 () -> "task1",
@@ -171,7 +180,9 @@ public class MainConcurrencyThreadsAndExecutors {
         }
         ConcurrentUtils.stop(executor3);
 
+        //================================================================
         System.out.println("Example InvokeAny: ");
+        //================================================================
         //returns the result of the fastest callable
         List<Callable<String>> callables1 = Arrays.asList(
                 callable("task1", 2),
@@ -187,7 +198,9 @@ public class MainConcurrencyThreadsAndExecutors {
         System.out.println(result1);
         ConcurrentUtils.stop(executor4);
 
+        //================================================================
         System.out.println("Scheduled Executors for running tasks periodically: ");
+        //================================================================
         ScheduledExecutorService executor5 = Executors.newScheduledThreadPool(1);
 
         Runnable task5 = () -> System.out.println("Scheduling: " + System.nanoTime());
@@ -200,17 +213,21 @@ public class MainConcurrencyThreadsAndExecutors {
         long remaningDealy = future5.getDelay(TimeUnit.MICROSECONDS);
         System.out.println("Get Dealy: " + remaningDealy);
 
+        //================================================================
         System.out.println("Execute task periodically (scheduleAtFixedRate): ");
+        //================================================================
         //capable of executing tasks with a fixed time rate
         int initialDelay = 0; //wait before the task will be executed
         int period = 1; //triggers this task every second
         //the drawback of this method is that it doesn't take into account the actual duration of the task
         //So if you specify a period of one second but the task needs 2 seconds to be executed
-        //then the thread pool will working to capacity very soon
+        //then the thread pool will be working to capacity very soon
         executor5.scheduleAtFixedRate(task5, initialDelay, period, TimeUnit.SECONDS);
         ConcurrentUtils.stop(executor5);
 
+        //================================================================
         System.out.println("Execute task periodically (scheduleWithFixedDelay): ");
+        //================================================================
         ScheduledExecutorService executor6 = Executors.newScheduledThreadPool(1);
         Runnable task6 = () -> {
             try {
