@@ -1,6 +1,7 @@
 package examples;
 
 import examples.utils.ConcurrentUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 public class MainConcurrencyThreadsAndExecutors {
 
     static Callable<String> callable(String result, long sleepSconds) {
@@ -51,13 +53,13 @@ public class MainConcurrencyThreadsAndExecutors {
 //                            .thenRun(() -> System.out.println("Go grab a drink, everything worked"));
 
                 }
-        ).collect(Collectors.toList());
+        ).toList();
 
         // Get data from the future collection above.
         List<String> joinedResults = results
                 .stream()
                 .map(CompletableFuture::join)
-                .collect(Collectors.toList());
+                .toList();
 
         System.out.println("CompletableFuture Result is: " + joinedResults);
 
