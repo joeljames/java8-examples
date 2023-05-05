@@ -1,12 +1,12 @@
 package examples;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import examples.utils.ConcurrentUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -128,7 +128,16 @@ public class MainConcurrencyThreadsAndExecutors {
             }
         };
         //newFixedThreadPool(1) is equivalent to newSingleThreadExecutor()
-        ExecutorService executor1 = Executors.newFixedThreadPool(1);
+        //Give meaningful name to executor thread
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("meaningful-name-%d")
+                .setPriority(Thread.NORM_PRIORITY + 1)
+                .setDaemon(true)
+                .build();
+
+        ExecutorService executor1 = Executors.newFixedThreadPool(
+                Runtime.getRuntime().availableProcessors(), //Get thread count base on number of processors
+                threadFactory);
         Future<Integer> future = executor1.submit(task3);
         System.out.println("future done? " + future.isDone());
         Integer result = null;
