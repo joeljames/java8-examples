@@ -96,6 +96,20 @@ public class MainConcurrencyThreadsAndExecutors {
         thread2.start();
 
         //================================================================
+        System.out.println("Custom executorService with large thread pool: ");
+        //================================================================
+        int maxQueryThreads = 1024;
+        int workQueueSize = 5120;
+        //Use large thread pool if you have blocking I/O. Small thread pools will get exhausted easily and you won't achieve parallelism.
+        ThreadPoolExecutor executorService = new ThreadPoolExecutor(
+                maxQueryThreads,
+                maxQueryThreads,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue(workQueueSize)
+        );
+
+        //================================================================
         System.out.println("Threads example using executor: ");
         //================================================================
         //ExecutorService is a higher level replacement for working with threads directly
