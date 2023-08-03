@@ -104,5 +104,6 @@ Table of Contents
   * [Bytes to String](src/java/examples/BytesToString.java)
   * [By Reference](src/java/examples/ByReference.java)
   * [Graph](src/java/examples/Graph.java)
+  * [Java Flight Recorder](src/java/examples/JavaFlightRecorder.java)
 
 Thanks for reading!
