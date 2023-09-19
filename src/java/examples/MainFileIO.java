@@ -1,18 +1,17 @@
 package examples;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class MainFileIO {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("listing files : ");
         // the creation of the stream is wrapped into a try/with statement.
         // Streams implement AutoCloseable and in this case we really have to close the 
@@ -106,5 +105,29 @@ public class MainFileIO {
             e.printStackTrace();
         }
 
+        System.out.println("Reading byte data stored in a file using DataInputStream: ");
+        File[] files = Stream.of("res/bytes.txt")
+                .map(File::new)
+                .toList()
+                .toArray(size -> new File[]{});
+
+        readDumps(files);
+    }
+
+    static public List<byte[]> readDumps(File... files) throws IOException {
+        List<byte[]> messages = new ArrayList<>();
+        for (File file : files) {
+            try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
+                while (true) {
+                    int messageSize = in.readInt();
+                    byte[] messageBytes = new byte[messageSize];
+                    in.readFully(messageBytes);
+                    messages.add(messageBytes);
+                }
+            } catch (EOFException ignored) {
+                // Eventually, we hit the end of the file.
+            }
+        }
+        return messages;
     }
 }
