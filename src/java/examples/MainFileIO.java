@@ -106,7 +106,7 @@ public class MainFileIO {
         }
 
         System.out.println("Reading byte data stored in a file using DataInputStream: ");
-        File[] files = Stream.of("res/bytes.txt")
+        File[] files = Stream.of("res/bytesDump")
                 .map(File::new)
                 .toList()
                 .toArray(size -> new File[]{});
