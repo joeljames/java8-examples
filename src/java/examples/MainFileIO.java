@@ -119,7 +119,9 @@ public class MainFileIO {
         for (File file : files) {
             try (DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(file)))) {
                 while (true) {
+                    // Here the first part of the message is the message payload length
                     int messageSize = in.readInt();
+                    // The second part is the actual message payload in bytes
                     byte[] messageBytes = new byte[messageSize];
                     in.readFully(messageBytes);
                     messages.add(messageBytes);
