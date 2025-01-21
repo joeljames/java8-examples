@@ -105,7 +105,7 @@ Table of Contents
   * [By Reference](src/java/examples/ByReference.java)
   * [Graph](src/java/examples/Graph.java)
   * [Java Flight Recorder](src/java/examples/JAVA_FLIGHT_RECORDER.md)
-  * [JMH](src/java/jmh/java/SomeClassBench.java)
+  * [JMH](src/jmh/java/SomeClassBench.java) (Th directory structure is important for the JMH plugin to work. The benchmarks are in the `src/jmh/java` directory)
       * ./gradlew tasks
       * ./gradlew jmh
 

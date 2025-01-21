@@ -23,6 +23,8 @@ import org.openjdk.jmh.annotations.Warmup;
 @OutputTimeUnit(TimeUnit.MINUTES)
 @State(Scope.Benchmark)
 public class SomeClassBench {
+    // The directory structure is important. The file should be in src/jmh/java
+    
     @Setup
     public void setup()  throws IOException {
         // Read some file to setup the benchmark
