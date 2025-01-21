@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id'idea'
     id 'io.freefair.lombok' version '6.4.1'
+    // JMH java benchmark
     id "me.champeau.jmh" version "0.7.1"
 }
 
