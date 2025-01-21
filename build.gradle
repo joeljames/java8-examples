@@ -35,8 +35,4 @@ dependencies {
     annotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:1.37"
 }
 
-jmh {
-    includes = ['.*']
-}
-
 sourceSets.main.java.srcDirs += ['src/java']
